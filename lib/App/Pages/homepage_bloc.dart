@@ -30,6 +30,13 @@ class HomepageView extends StatelessWidget {
                 : IconButton(
                     onPressed: () {
                       BlocProvider.of<AuthBloc>(context).add(LogoutEvent());
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          duration: Duration(seconds: 2),
+                          content: Text("Logout Successfully"),
+                          backgroundColor: Colors.red.shade300,
+                        ),
+                      );
                     },
                     icon: Icon(Icons.logout),
                   ),

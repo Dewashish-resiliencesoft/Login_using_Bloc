@@ -7,7 +7,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(Unauthenticatedstate()) {
     on<LoginEvent>((event, emit) async {
       emit(Loadingstate());
-
       try {
         final email = event.email;
         final password = event.password;
