@@ -47,9 +47,10 @@ class Authpage extends StatelessWidget {
                   ),
                 );
 
-                Navigator.pushReplacement(
+                Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (_) => const HomepageView()),
+                  (route) => false,
                 );
               }
             },
