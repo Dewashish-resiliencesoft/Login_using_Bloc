@@ -12,17 +12,27 @@ class HomepageView extends StatelessWidget {
       appBar: AppBar(
         title: Text("Authentication Using BLOC"),
         actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const Authpage();
-                  },
-                ),
-              );
-            },
-            icon: Icon(Icons.login_outlined),
+          BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, state) =>
+                state is Unauthenticatedstate || state is Authfailursetate
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Authpage();
+                          },
+                        ),
+                      );
+                    },
+                    icon: Icon(Icons.login_outlined),
+                  )
+                : IconButton(
+                    onPressed: () {
+                      BlocProvider.of<AuthBloc>(context).add(LogoutEvent());
+                    },
+                    icon: Icon(Icons.logout),
+                  ),
           ),
         ],
       ),
